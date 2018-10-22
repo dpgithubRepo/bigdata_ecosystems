@@ -15,18 +15,31 @@ Apache Storm :
 Storm Architecture:
 
    -->  contains Master and Slave / worker nodes
+   
    --> zoo keeper manages the master and slave nodes
+   
    --> master node is similar to hadoop's name node
+   
    --> Nimbus process is run in master node and supervisor process in the slave nodes
+   
    --> each supervisor process contains spouts and bolts
+   
    --> Storm jobs are called Topology
+   
    --> Real time scenarios the Topology is not an ending job
+   
    --> Nimbus takes care of distributing the code across the cluster, assigning jobs to the slaves and monitoring them and take care of failures
+   
    --> Each worker node runs a daemon called Supervisor
+   
   --> Each supervisor runs one or more process which are separate JVM process
+  
   --> Each worker process (i.e jvm process) can run one or more tasks in parallel(spouts & bolts)
+  
   --> Each supervisor listens to Nimbus and then starts or stops the process as necessary
+  
  --> Each worker process executes a subset of topology
+ 
   --> A running topology consists of many number of worker process spread across the cluster
  
  Spout and Bolt 
@@ -93,6 +106,7 @@ More details on Bolt:
  Hierarchy of Bolt:
 
   IBolt(intf)  <----------IRichBolt(intf)  <------BaseRichBolt(abstract)
+  
   IBolt(intf)  <----------IBasicBolt(intf)  <------BaseBasicBolt(abstract)
 
 BaseBasicBolt  does the ack of tuples automatically where as the BaseRichBolt implementation needs to have the ack method explicitly. ack method of BaseRichbolt has more control where the implementation can decide whether to ack or not
@@ -137,7 +151,7 @@ other steps in sequence
   --> StormSubmitter calls the submitTopology on the Nimbus Thrift Service
   --> Topology configuration is serialized using json
   -->Thrift SubmitTopology takes the nimbus inbox path where the jar was uploaded
-   --> Nimbus Normalizes the topology configuration. Normalization is important bcos it ensures every single task  have same serialization registration for getting the serializations work       properly.
+   --> Nimbus Normalizes the topology configuration. Normalization is important bcos it ensures every single task  have same    serialization registration for getting the serializations work properly.
 
 --> nimbus sets up the static state of the topology 
          jars and configs are put in the local directory of nimbus  {nimbus local directort}/stormdist/{topology id} 
