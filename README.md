@@ -7,10 +7,10 @@ Apache Storm :
 
  1. Distributed real time big data processing system (where as Hadoop suits for batch processing)
  2. Fault tolerant
-3. Horizontal Scalable
-4. Streaming data framework meaning it is an event/activity based i.e when ever there is some activity happens/triggered the data is created and ingested to the target systems.
-5. Storm is stateless but it takes the help of zookeeper to maintain the master and slave nodes and helps them to work in tandem
-6. can execute all types of processing on real time data in parallel
+ 3. Horizontal Scalable
+ 4. Streaming data framework meaning it is an event/activity based i.e when ever there is some activity happens/triggered the data is created and ingested to the target systems.
+ 5. Storm is stateless but it takes the help of zookeeper to maintain the master and slave nodes and helps them to work in tandem
+ 6. can execute all types of processing on real time data in parallel
 
 Storm Architecture:
 
@@ -149,13 +149,19 @@ First Step uploading JAR
 
 other steps in sequence
   --> StormSubmitter calls the submitTopology on the Nimbus Thrift Service
+  
   --> Topology configuration is serialized using json
+  
   -->Thrift SubmitTopology takes the nimbus inbox path where the jar was uploaded
+  
    --> Nimbus Normalizes the topology configuration. Normalization is important bcos it ensures every single task  have same    serialization registration for getting the serializations work properly.
 
 --> nimbus sets up the static state of the topology 
-         jars and configs are put in the local directory of nimbus  {nimbus local directort}/stormdist/{topology id} 
+
+        jars and configs are put in the local directory of nimbus  {nimbus local directort}/stormdist/{topology id} 
+         
         setup-storm-static writes task -> component mapping to ZK
+        
         setup-hearbeats creates a directory in ZK where tasks can heartbeat
 
 
