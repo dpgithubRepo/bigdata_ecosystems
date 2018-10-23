@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.storm.topology.BasicOutputCollector;
 import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.topology.base.BaseBasicBolt;
+import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
 import org.apache.storm.tuple.Values;
 
@@ -33,17 +34,17 @@ public class CallLogAggregatorBolt extends BaseBasicBolt{
 		
 		String callLogKey = tuple.getString(0);
 		int call_duration = tuple.getInteger(1);
-		Integer callDurationVal = callLogAggregatorMap.get(callLogKey)==null?call_duration:callLogAggregatorMap.get(callLogKey)+call_duration;
-		callLogAggregatorMap.put(callLogKey, callDurationVal);
-		basicOutputCollector.emit(new Values(callLogKey, callDurationVal));
+		Integer callDuration = callLogAggregatorMap.get(callLogKey)==null?call_duration:callLogAggregatorMap.get(callLogKey)+call_duration;
+		callLogAggregatorMap.put(callLogKey, callDuration);
+		basicOutputCollector.emit(new Values(callLogKey, callDuration));
 	}
 
 	/* (non-Javadoc)
 	 * @see org.apache.storm.topology.IComponent#declareOutputFields(org.apache.storm.topology.OutputFieldsDeclarer)
 	 */
 	@Override
-	public void declareOutputFields(OutputFieldsDeclarer arg0) {
-		
+	public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer) {
+		outputFieldsDeclarer.declare(new Fields("callLogKey", "callDuration"));
 	}
 
 }
