@@ -46,6 +46,7 @@ public class UserBonusOutputterBolt extends BaseRichBolt {
 		 * maxparallelism of task is set to 5 in driver and also the spout instances are configured to 5
 		 */
 		user_bonus_file = new File("user_bonus_file_"+context.getThisTaskId());
+		//user_bonus_file = new File("user_bonus_file_shuffle"+context.getThisTaskId());
 		try {
 			user_bonus_file.createNewFile();
 			bufferedWriter = new BufferedWriter(new FileWriter(user_bonus_file));

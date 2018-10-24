@@ -22,6 +22,7 @@ public class UserBonusTopology {
 		TopologyBuilder topologyBuiler = new TopologyBuilder();
 		topologyBuiler.setSpout("user_bonus_spout", new UserBonusSourceSpout(),1);
 		topologyBuiler.setBolt("user_bonus_bolt", new UserBonusOutputterBolt(),5).fieldsGrouping("user_bonus_spout", new Fields("user_id"));
+		//topologyBuiler.setBolt("user_bonus_bolt", new UserBonusOutputterBolt(),5).shuffleGrouping("user_bonus_spout");
 		
 		Config config = new Config();
 		config.setDebug(true);
