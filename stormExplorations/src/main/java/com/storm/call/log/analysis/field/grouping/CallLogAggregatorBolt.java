@@ -13,7 +13,7 @@ import org.apache.storm.tuple.Values;
 
 
 /**
- * The Class ClassLogAggregatorBolt translates the stream from the callLogFormater 
+ * The Class CallLogAggregatorBolt translates the stream from the callLogFormater 
  * 
  * callLogAggregateMap will contain the call duration information for the key from_mob::to_mob 
  * 
