@@ -38,6 +38,12 @@ semantic in case of failures which can be fine for the use case and more over th
 Storing state can be of ay strategy either stored  or data base or in-memory but backed by HDFS like hbase etc. and also this states need not be stored forever. for example you could have an in memory implementation which keeps the data which is x hrs/days older and drop remaining.
 
 
+When to consider using Trident:
+
+If the use case demands to process the query only once (exactly once semantic) then Trident can be considered. Trident may not be suitable for all the cases especially for high performance use cases as trident adds the overhead of storing the state.
+
+DRPC : Trident comes with DRPC which allows to execute the query direclty on storm topology and get the results
+
 
 
 
