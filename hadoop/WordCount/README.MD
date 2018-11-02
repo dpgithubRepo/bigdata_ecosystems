@@ -2,8 +2,11 @@
 WordCount is like hello world program of hadoop MR.
 
 WordCountDriver.java	 Driver Class 
+
 WordCountMapper.java	 Mapper class 
+
 WordCountReducer.java  Reducer class
+
 
 
 Steps to Run:
