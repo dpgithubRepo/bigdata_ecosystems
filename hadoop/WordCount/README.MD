@@ -30,8 +30,9 @@ Steps to Run:
   1. _SUCCESS   : This is a zero byte file just by reading the name of the file we can be conclude on final result                                the MR program(either success or failure). This can be helpful during automation steps to determine the                       final state of MR execution
   
   2. part-r-00000  : This contains the actual result of the MR program 
-                     output will be depend on the input text but format of the result would look like following (word  count)
-    
+                     output will be depend on the input text but format of the result would look like following 
+                     
+                     (word  count)
                      Big 234
                      Data 245
                      an 354
