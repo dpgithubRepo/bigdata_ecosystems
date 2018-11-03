@@ -12,7 +12,7 @@ let us consider the basic use case where there are two input files.
 
 and let us say we need output in the following format
 
-     transaction_id user_email
+ transaction_id user_email
      
 To achieve the above output format we need to join both the above input files
 
