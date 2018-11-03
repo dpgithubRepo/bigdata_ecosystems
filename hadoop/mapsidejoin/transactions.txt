@@ -1,0 +1,16 @@
+t001 001 books credit NYC
+t002 001 Food debit NYC
+t003 001 drinks credit WDC
+t004 001 movie debit CHIC
+t005 002 party debit NYC
+t006 002 Food debit NYC
+t007 002 drinks debit NYC
+t008 002 movie credit NYC
+t009 004 party debit bnglr
+t010 004 Food debit bnglr
+t011 004 drinks debit bnglr
+t012 004 movie credit bnglr
+t013 003 dine debit chn
+t014 003 holiday debit chn
+t015 003 drinks debit chn
+t016 003 movie credit chn
