@@ -3,7 +3,7 @@ Sqoop :
 
 This write up summarizes the usage of sqoop.
 
-Sqoop is used to transform data from RDBMS to HDFS and also from HDFS to RDBMS.
+Sqoop is used to transfer data from RDBMS to HDFS and also from HDFS to RDBMS.
 
 for eg: we can cosider there is some legacy system which uses RDBMS for storage and let us consider the amount of data is big and need to run some kind of MR process. we can use sqoop to connect to the RDBMS and load data from RDBMS to HDFS
 
