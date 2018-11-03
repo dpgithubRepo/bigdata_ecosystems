@@ -1,5 +1,6 @@
 
 Map Side Join :
+---------------
 
 This write up contains the theory about map side join and little of explanation about sample code.
 
@@ -18,6 +19,7 @@ To achieve the above output format we need to join both the above input files
 
 
 Map Side Join process/steps:
+----------------------------
 
 1. Let us assume that transaction input file is divided to 3 blocks(128 mb each) on hdfs
 
@@ -36,7 +38,7 @@ Map Side Join process/steps:
 
 
 Code :  
-
+-----
 1. TransactionMapper.java   : This is same as any traditional mapper class, except here we have overriden the setup method to 
                               read the users.txt file from distributed cache and the required info is loaded to a Map ds which 
                               is further used in map method to achieve the join
