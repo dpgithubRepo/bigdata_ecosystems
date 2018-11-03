@@ -101,6 +101,7 @@ let us create new directory in hdfs called sqooped_data:
 drwxr-xr-x   - hadoopgrp  supergroup          0 2018-11-03 12:35 sqooped_data
 
 
+
 import data from mysql transactions.Transaction_log to hdfs sqooped_data directory:
 -----------------------------------------------------------------------------------
 
@@ -123,7 +124,9 @@ let us inspect the imported data in hdfs:
 ---------------------------
 
 -rw-r--r--   1 hadoopgrp supergroup          0 2018-11-03 12:52 sqooped_data/_SUCCESS
+
 -rw-r--r--   1 hadoopgrp supergroup        216 2018-11-03 12:52 sqooped_data/part-m-00000
+
 
 The above structure is similar to the output of a MR job by which we can confirm that the sqoop import did run the
 MR
