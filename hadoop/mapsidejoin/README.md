@@ -25,7 +25,7 @@ Map Side Join process/steps:
 
 3. Since the transaction file we assumed to be divided to 3 blocks 3 mapper tasks will be assigned and the user file is loaded to memory. The user file will be availabe in memory of each of the mapper container.
 
-when we compare the above two files user file will be of low size compared to that of transaction file and also the growth rate of user file would be less compared to that of transaction file.
+   when we compare the above two files user file will be of low size compared to that of transaction file and also the growth    rate of user file would be less compared to that of transaction file.
 
 4. Job tracker will load the user file to distributed cache of the every task tracker node.Distributed cache is an area in local file system of the slave(task tracker node) and it will be loaded to the memory of map task
 
