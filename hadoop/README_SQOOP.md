@@ -175,3 +175,44 @@ let us see the content of the part-m-00000
 
 3,Low  valued  transaction,2018-11-03,IN_PROGRESS,jose kuto,2018-11-03
 
+
+
+Now let us do vice versa - load data from HDFS to RDBMS table:
+--------------------------------------------------------------
+
+first, let us empty the table Transaction_Log. We are just deleting the rows in the table but the table
+structure still exists with 0 rows.
+
+mysql> Delete from Transaction_Log;
+Query OK, 3 rows affected (0.00 sec)
+
+mysql> select * from Transaction_Log;
+Empty set (0.00 sec)
+
+Let us load the data from part-m-00000 to the Transaction_Log table under transactions schema
+
+sqoop export --connect jdbc:mysql://localhost/transactions --table Transaction_Log --export-dir sqooped_data  -m 1 --username root --password npntraining
+
+This is similar to the import command and all the options are same as mentioned earlier.This command triggers the mr job.
+
+
+Verify the sqoop export by checking the rows in mysql table:
+
+------------------------------------------------------------
+mysql> select * from Transaction_Log;
+
++----------+----------------------------+------------+--------------+--------------+------------+
+
+| trans_id | trans_desc                 | trans_date | trans_status | created_by   | created_at |
+
++----------+----------------------------+------------+--------------+--------------+------------+
+
+|        1 | high valued transaction    | 2018-11-03 | COMPLETE     | robin ruskus | 2018-11-03 |
+
+|        2 | medium valued  transaction | 2018-11-03 | IN_PROGRESS  | mian curius  | 2018-11-03 |
+
+|        3 | Low  valued  transaction   | 2018-11-03 | IN_PROGRESS  | jose kuto    | 2018-11-03 |
+
++----------+----------------------------+------------+--------------+--------------+------------+
+
+3 rows in set (0.00 sec)
