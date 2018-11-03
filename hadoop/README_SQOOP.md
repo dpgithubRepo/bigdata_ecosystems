@@ -341,7 +341,7 @@ Sqoop Import all with exclude table option
 Import all command can include exclude-tables option stopping from importing the specified tables
 
 
-sqoop import-all-tables --warehouse-dir /sqoop/importall_1/ --exclude-tables "Transaction_Log" --connect jdbc:mysql://localhost/transactions -m 4 --username root --password npntraining
+sqoop import-all-tables --warehouse-dir /sqoop/importall_1/ --exclude-tables "Transaction_Log" --connect jdbc:mysql://localhost/transactions -m 4 --username root --password XXXXXXXXXX
 `
 
 hdfs dfs -ls /sqoop/importall_1
