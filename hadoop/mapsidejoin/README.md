@@ -43,7 +43,7 @@ Code :
 
 2. TransactionReducer.java  : This use case doesn't require the reducer.
 
-3. App.java : This is the driver class which loads the users.txt to the distributed cache and also we are setting the number                  of reducers to zer0 as this use case doesn't need the reducer phase.
+3. App.java : This is the driver class which loads the users.txt to the distributed cache and also we are setting the number                  of reducers to zero as this use case doesn't need the reducer phase.
 
 
 
