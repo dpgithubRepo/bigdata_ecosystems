@@ -216,3 +216,140 @@ mysql> select * from Transaction_Log;
 +----------+----------------------------+------------+--------------+--------------+------------+
 
 3 rows in set (0.00 sec)
+
+
+
+Import All tables from RDBMS to HDFS
+----------------------------------------------------
+
+Let us create two more tables called Transaction_log_backup1,Transaction_log_backup2 under transaction schema with same structure of Transaction_Log and also let us have the same rows as that of the Transaction_Log as this will serve
+the purpose of demonstrating the example of importing all tables via sqoop
+
+create new tables Transaction_Log_backup1 and Transaction_Log_backup2
+----------------------------------------------------------------------------------------------------
+
+mysql> create table Transaction_Log_backup1( trans_id int not null AUTO_INCREMENT, trans_desc varchar(512), trans_date Date not null, trans_status varchar(20)not null, created_by varchar(50) not null, created_at Date not null, PRIMARY KEY(trans_id) );
+
+mysql> create table Transaction_Log_backup2( trans_id int not null AUTO_INCREMENT, trans_desc varchar(512), trans_date Date not null, trans_status varchar(20)not null, created_by varchar(50) not null, created_at Date not null, PRIMARY KEY(trans_id) );
+
+
+mysql> show tables;
++-------------------------+
+| Tables_in_transactions  |
+
++-------------------------+
+| Transaction_Log         |
+
+| Transaction_Log_backup1 |
+
+| Transaction_Log_backup2 |
+
++-------------------------+
+3 rows in set (0.00 sec)
+
+
+Copy data from Transaction_Log to the new tables:
+------------------------------------------------
+
+mysql> insert into Transaction_Log_backup1  (select * from Transaction_Log);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into Transaction_Log_backup2  (select * from Transaction_Log);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from Transaction_Log_backup1;
+
++----------+----------------------------+------------+--------------+--------------+------------+
+| trans_id | trans_desc                 | trans_date | trans_status | created_by   | created_at |
+
++----------+----------------------------+------------+--------------+--------------+------------+
+|        1 | high valued transaction    | 2018-11-03 | COMPLETE     | robin ruskus | 2018-11-03 |
+
+|        2 | medium valued  transaction | 2018-11-03 | IN_PROGRESS  | mian curius  | 2018-11-03 |
+
+|        3 | Low  valued  transaction   | 2018-11-03 | IN_PROGRESS  | jose kuto    | 2018-11-03 |
+
++----------+----------------------------+------------+--------------+--------------+------------+
+
+3 rows in set (0.00 sec)
+
+
+mysql> select * from Transaction_Log_backup2;
+
++----------+----------------------------+------------+--------------+--------------+------------+
+
+| trans_id | trans_desc                 | trans_date | trans_status | created_by   | created_at |
+
++----------+----------------------------+------------+--------------+--------------+------------+
+
+|        1 | high valued transaction    | 2018-11-03 | COMPLETE     | robin ruskus | 2018-11-03 |
+
+|        2 | medium valued  transaction | 2018-11-03 | IN_PROGRESS  | mian curius  | 2018-11-03 |
+
+|        3 | Low  valued  transaction   | 2018-11-03 | IN_PROGRESS  | jose kuto    | 2018-11-03 |
+
++----------+----------------------------+------------+--------------+--------------+------------+
+
+3 rows in set (0.00 sec)
+
+Sqoop Import all tables:
+------------------------
+
+sqoop import-all-tables --connect jdbc:mysql://localhost/transactions --username root --password XXXXXXXXXXX
+
+
+Note: for using import-all-tables in sqoop it is mandatory that every table to have a primary key
+
+
+Verify Import All Result:
+-------------------------
+
+hdfs dfs -ls
+
+drwxr-xr-x   - hadoopgrp supergroup          0 2018-11-03 14:37 Transaction_Log
+
+drwxr-xr-x   - hadoopgrp supergroup          0 2018-11-03 14:38 Transaction_Log_backup1
+
+drwxr-xr-x   - hadoopgrp supergroup          0 2018-11-03 14:38 Transaction_Log_backup2
+
+
+Sqoop Import all with warehouse-dir option
+-----------------------------------------
+
+--target-dir - we used in sqoop import for specifying the target dir
+
+to specify the similar option for import-all we can use the --warehouse-dir option
+
+
+sqoop import-all-tables --warehouse-dir /sqoop/importall/ --connect jdbc:mysql://localhost/transactions -m 4 --username root --password npntraining
+
+
+hdfs dfs -ls /sqoop/importall
+
+drwxr-xr-x   - hadoopgroup supergroup          0 2018-11-03 16:11 /sqoop/importall/Transaction_Log
+
+drwxr-xr-x   - hadoopgroup supergroup          0 2018-11-03 16:12 /sqoop/importall/Transaction_Log_backup1
+
+drwxr-xr-x   - hadoopgroup supergroup          0 2018-11-03 16:12 /sqoop/importall/Transaction_Log_backup2
+
+
+Sqoop Import all with exclude table option
+-----------------------------------------
+
+Import all command can include exclude-tables option stopping from importing the specified tables
+
+
+sqoop import-all-tables --warehouse-dir /sqoop/importall_1/ --exclude-tables "Transaction_Log" --connect jdbc:mysql://localhost/transactions -m 4 --username root --password npntraining
+`
+
+hdfs dfs -ls /sqoop/importall_1
+
+drwxr-xr-x   - hadoopgrp supergroup          0 2018-11-03 16:40 /sqoop/importall_1/Transaction_Log_backup1
+
+drwxr-xr-x   - hadoopgrp supergroup          0 2018-11-03 16:40 /sqoop/importall_1/Transaction_Log_backup2
+
+As we can see in the above list Transaction_Log is missing which means the table is not imported as we have
+mentioned it in --exclude-tables option.
+
