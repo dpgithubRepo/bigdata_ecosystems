@@ -353,3 +353,8 @@ drwxr-xr-x   - hadoopgrp supergroup          0 2018-11-03 16:40 /sqoop/importall
 As we can see in the above list Transaction_Log is missing which means the table is not imported as we have
 mentioned it in --exclude-tables option.
 
+
+Sqoop Job & Incremental imports :
+---------------------------------
+
+work in progres,,,,,
