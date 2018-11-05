@@ -14,6 +14,13 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 
+/**
+ * The Class App is the driver class. This sets up the required mapper, reducer, file formats and also in this
+ sample it sets up the distributed cache file which is used in the mapper for join
+ * 
+ * @author Durga Prasad
+ */
+
 public class App 
 {
     public static void main( String[] args ) throws IOException, URISyntaxException, ClassNotFoundException, InterruptedException
