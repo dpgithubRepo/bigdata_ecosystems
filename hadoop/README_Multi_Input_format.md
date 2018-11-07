@@ -30,3 +30,6 @@ Let us consider the bank sends some notification via mobile to the account holde
  
       account_holder_name account_holder_mob_no, account_holder_mail_id,mob_notification_status
       --------------------------------------------------------------------------------------
+
+
+For this example let us consider that there is one to one mapping between the input files and the order is maintained same in both the files.
